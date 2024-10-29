@@ -32,6 +32,7 @@ require('lazy').setup({
   {'neovim/nvim-lspconfig'},
   {'hrsh7th/cmp-nvim-lsp'},
   {'hrsh7th/nvim-cmp'},
+	{'micangl/cmp-vimtex'},
   {'hrsh7th/cmp-buffer'},
   {'L3MON4D3/LuaSnip'},
   {'NvChad/nvterm',
@@ -57,10 +58,13 @@ require('lazy').setup({
  {
   "lervag/vimtex",
   lazy = false,     -- we don't want to lazy load VimTeX
-  init = function()
+  init = function() 
     -- VimTeX configuration goes here
-    vim.g.vimtex_view_method = "zathura"
+    vim.g.vimtex_view_method = "general"
+    vim.g.vimtex_view_general_viewer = "okular"
+    vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
   end
+  
 }
 })
 
@@ -89,6 +93,7 @@ local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 local cmp_format = require('lsp-zero').cmp_format({details = true})
 
+-- Setup autocompletion
 cmp.setup({
   sources = {
     {name = 'nvim_lsp'},
@@ -110,9 +115,17 @@ cmp.setup({
     completeopt = 'menu,menuone,noinsert'
   },
 }) 
+-- Setup latex specific
+cmp.setup.filetype("tex", {
+	sources = {
+		{ name = 'vimtex'},
+		{ name = 'buffer' },
+	},
+})
 
 -- Custom keybindings
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "<C-s>", ":w<CR>")
 
