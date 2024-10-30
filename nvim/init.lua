@@ -110,9 +110,9 @@ local cmp_format = require('lsp-zero').cmp_format({details = true})
 -- Setup autocompletion
 cmp.setup({
   sources = {
-    {name = 'nvim_lsp'},
-    {name = 'buffer'},
-		{name = 'luasnip'},
+    { name = 'nvim_lsp'},
+		{ name = 'luasnip' },
+    { name = 'buffer'  },
   },
   --- (Optional) Show source name in completion menu
   formatting = cmp_format,
@@ -133,9 +133,9 @@ cmp.setup({
 -- Setup latex specific
 cmp.setup.filetype("tex", {
 	sources = {
-		{ name = 'vimtex'},
+		{ name = 'vimtex' },
+		{ name = 'luasnip'},
 		{ name = 'buffer' },
-		{name = 'luasnip'},
 	},
 })
 
