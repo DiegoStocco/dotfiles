@@ -34,7 +34,9 @@ require('lazy').setup({
   {'hrsh7th/nvim-cmp'},
 	{'micangl/cmp-vimtex'},
   {'hrsh7th/cmp-buffer'},
-  {'L3MON4D3/LuaSnip'},
+  {'L3MON4D3/LuaSnip',
+	 dependencies = { "rafamadriz/friendly-snippets" },
+  },
   {'NvChad/nvterm',
   config = function ()
     require("nvterm").setup()
@@ -65,7 +67,16 @@ require('lazy').setup({
     vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
   end
   
-}
+ },
+ {
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp"
+ },
+ { 'saadparwaiz1/cmp_luasnip' },
+ { "rafamadriz/friendly-snippets" },
 })
 
 -- Set autoclose brackets
@@ -83,11 +94,14 @@ lsp_zero.on_attach(function(client, bufnr)
                             preserve_mappings = false})
 end)
 
+-- Setup LSPs
 require('lspconfig').hls.setup({})
 require('lspconfig').clangd.setup({})
 require('lspconfig').pyright.setup({})
 require('lspconfig').glsl_analyzer.setup({})
 
+-- Setup snippets
+require("luasnip.loaders.from_vscode").lazy_load()
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
@@ -98,6 +112,7 @@ cmp.setup({
   sources = {
     {name = 'nvim_lsp'},
     {name = 'buffer'},
+		{name = 'luasnip'},
   },
   --- (Optional) Show source name in completion menu
   formatting = cmp_format,
@@ -120,6 +135,7 @@ cmp.setup.filetype("tex", {
 	sources = {
 		{ name = 'vimtex'},
 		{ name = 'buffer' },
+		{name = 'luasnip'},
 	},
 })
 
