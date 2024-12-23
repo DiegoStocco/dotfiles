@@ -1,9 +1,10 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 local uv = vim.uv or vim.loop
 
--- set tab size to 2
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 
 -- Yank to system clipboard
 vim.cmd[[set clipboard=unnamedplus]]
@@ -55,7 +56,7 @@ require('lazy').setup({
         })
     end
  },
- { 'dasupradyumna/midnight.nvim', lazy = false, priority = 1000 },
+ { 'alexanderbluhm/black.nvim'},
  {'m4xshen/autoclose.nvim'},
  {
   "lervag/vimtex",
@@ -83,7 +84,7 @@ require('lazy').setup({
 require("autoclose").setup({})
 
 -- Set color scheme
-vim.cmd[[colorscheme midnight]]
+vim.cmd[[colorscheme black]]
 
 local lsp_zero = require('lsp-zero')
 
