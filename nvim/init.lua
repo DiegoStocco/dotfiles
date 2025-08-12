@@ -1,144 +1,164 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-local uv = vim.uv or vim.loop
+vim.o.winborder = "rounded"
+-- Indenting stuff
+vim.o.tabstop = 4
+vim.o.smartindent = false
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
 
-vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
-vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.o.signcolumn = "yes"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.undofile = true
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.o.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+-- vim.o.cursorline = true
+vim.o.clipboard = "unnamedplus" -- Yank to system clipboard
+vim.o.smoothscroll = true
+vim.o.termguicolors = true
 
--- Yank to system clipboard
-vim.cmd[[set clipboard=unnamedplus]]
-
-
--- Auto-install lazy.nvim if not present
-if not uv.fs_stat(lazypath) then
-  print('Installing lazy.nvim....')
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
-  print('Done.')
-end
- 
-
-vim.opt.rtp:prepend(lazypath)
-
--- Install plugins if not present
-require('lazy').setup({
-  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-  {'neovim/nvim-lspconfig'},
-  {'hrsh7th/cmp-nvim-lsp'},
-  {'hrsh7th/nvim-cmp'},
-	{'micangl/cmp-vimtex'},
-  {'hrsh7th/cmp-buffer'},
-  {'L3MON4D3/LuaSnip',
-	 dependencies = { "rafamadriz/friendly-snippets" },
-  },
-  {'NvChad/nvterm',
-  config = function ()
-    require("nvterm").setup()
-  end,
-  },
-  {"nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function () 
-      local configs = require("nvim-treesitter.configs")
-
-      configs.setup({
-          ensure_installed = { "c", "lua", "cpp", "haskell", "python", "glsl" },
-          sync_install = false,
-          highlight = { enable = true, additional_vim_regex_highlighting = false },
-          indent = { enable = true },  
-        })
-    end
- },
- { 'alexanderbluhm/black.nvim'},
- {'m4xshen/autoclose.nvim'},
- {
-  "lervag/vimtex",
-  lazy = false,     -- we don't want to lazy load VimTeX
-  init = function() 
-    -- VimTeX configuration goes here
-    vim.g.vimtex_view_method = "general"
-    vim.g.vimtex_view_general_viewer = "okular"
-    vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
-  end
-  
- },
- {
-	"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp"
- },
- { 'saadparwaiz1/cmp_luasnip' },
- { "rafamadriz/friendly-snippets" },
+vim.pack.add({
+    { src = 'https://github.com/neovim/nvim-lspconfig'},
+    { src = 'https://github.com/saghen/blink.cmp',
+        version = vim.version.range('1.*'),
+    },
+    { src = 'https://github.com/Saghen/blink.compat'},
+    { src = 'https://github.com/micangl/cmp-vimtex'},
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter',},
+    { src = 'https://github.com/lervag/vimtex' },
+    { src = "https://github.com/chomosuke/typst-preview.nvim",
+        version = vim.version.range('1.*'),
+    },
+    -- { src = 'https://github.com/L3MON4D3/LuaSnip' },
+    { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+    { src = 'https://github.com/numToStr/FTerm.nvim', },
+    { src = 'https://github.com/catppuccin/nvim'},
+    { src = "https://github.com/folke/which-key.nvim" }
 })
 
--- Set autoclose brackets
-require("autoclose").setup({})
+require "typst-preview".setup({})
 
--- Set color scheme
-vim.cmd[[colorscheme black]]
-
-local lsp_zero = require('lsp-zero')
-
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps({buffer = bufnr,
-                            preserve_mappings = false})
-end)
-
--- Setup LSPs
-require('lspconfig').hls.setup({})
-require('lspconfig').clangd.setup({})
-require('lspconfig').pyright.setup({})
-require('lspconfig').glsl_analyzer.setup({})
-
--- Setup snippets
-require("luasnip.loaders.from_vscode").lazy_load()
-
-local cmp = require('cmp')
-local cmp_action = require('lsp-zero').cmp_action()
-local cmp_format = require('lsp-zero').cmp_format({details = true})
+require "blink.compat".setup({})
 
 -- Setup autocompletion
-cmp.setup({
-  sources = {
-    { name = 'nvim_lsp'},
-		{ name = 'luasnip' },
-    { name = 'buffer'  },
-  },
-  --- (Optional) Show source name in completion menu
-  formatting = cmp_format,
+require "blink.cmp".setup({
+    keymap = { 
+        preset = 'enter',
 
-  mapping = cmp.mapping.preset.insert({
-    -- confirm completion
-    ['<Enter>'] = cmp.mapping.confirm({select = false}),
+        ['<Up>'] = false,
+        ['<Down>'] = false,
 
-    ['<Tab>'] = cmp_action.tab_complete(),
-    ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
-    }),
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+    },
 
-  preselect = 'item',
-  completion = {
-    completeopt = 'menu,menuone,noinsert'
-  },
-}) 
--- Setup latex specific
-cmp.setup.filetype("tex", {
-	sources = {
-		{ name = 'vimtex' },
-		{ name = 'luasnip'},
-		{ name = 'buffer' },
-	},
+    signature = { enabled = true },
+    completion = {
+        list = { selection = { 
+            preselect = false,
+            auto_insert = false,
+        }, }, 
+        ghost_text = { enabled = true },
+    },
+
+    appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono'
+    },
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        per_filetype = {
+            tex = {'vimtex'},
+        },
+
+        providers = {
+            vimtex = {
+                name = 'vimtex',
+                module = 'blink.compat.source',
+
+            },
+        },
+    },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
 })
+
+-- Setup LSPs
+vim.lsp.enable({
+    'hls',
+    'clangd',
+    'pyright',
+    'glsl_analyzer',
+    'tinymist'
+})
+require('nvim-treesitter.configs').setup({ 
+    highlight = { enable = true, },
+    ensure_installed = { "bash", "c", "css", "cpp", "glsl", "haskell", "html", "javascript","lua", "python", "typst" },
+    indent = { enable = true, },
+})
+
+-- Setup floating terminal
+require('FTerm').setup({
+    border = 'rounded',
+    dimensions  = {
+        height = 0.6,
+        width = 0.5,
+    },
+})
+
+-- Set color scheme
+require("catppuccin").setup({
+    transparent_background = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        treesitter = true,
+        -- harpoon = true,
+        -- telescope = true,
+        -- mason = true,
+        -- noice = true,
+        -- notify = true,
+        which_key = true,
+        -- fidget = true,
+        blink_cmp = {
+            style = "bordered";
+        },
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                errors = { "italic" },
+                hints = { "italic" },
+                warnings = { "italic" },
+                information = { "italic" },
+            },
+            underlines = {
+                errors = { "underline" },
+                hints = { "underline" },
+                warnings = { "underline" },
+                information = { "underline" },
+            },
+            inlay_hints = {
+                background = true,
+            },
+        },
+    },
+    custom_highlights = function(colors)
+        return {
+            CursorLine = { 
+                underline = true,
+                bg = "#000000",
+            },
+        }
+    end
+})
+vim.cmd.colorscheme "catppuccin-mocha"
+
+
+-- VimTeX options
+vim.g.vimtex_view_method = "general"
+vim.g.vimtex_view_general_viewer = "okular"
+vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
+vim.g.vimtex_indent_enabled = 0
 
 -- Custom keybindings
 vim.g.mapleader = " "
@@ -150,5 +170,10 @@ vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 vim.keymap.set("n", "<C-n>", ":tabe ")
 
-vim.keymap.set({"n", "t"}, "<A-i>", function () require("nvterm.terminal").toggle('float') end)
-vim.keymap.set({"n", "t"}, "<A-h>", function () require("nvterm.terminal").toggle('horizontal') end)
+vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+
+vim.keymap.set("n", "<Leader>tp", ":TypstPreviewToggle<CR>")
+vim.keymap.set("n", "<Leader>tc", ":TypstPreviewFollowCursorToggle<CR>")
+
+vim.keymap.set("n", "N", "<cmd>lua vim.diagnostic.open_float()<cr>")
