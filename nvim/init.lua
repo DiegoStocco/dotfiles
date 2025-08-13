@@ -33,8 +33,11 @@ vim.pack.add({
     { src = 'https://github.com/lewis6991/gitsigns.nvim' },
     { src = 'https://github.com/numToStr/FTerm.nvim', },
     { src = 'https://github.com/catppuccin/nvim'},
-    { src = "https://github.com/folke/which-key.nvim" }
+    { src = "https://github.com/folke/which-key.nvim" },
+    { src = "https://github.com/echasnovski/mini.pick" },
 })
+
+require "mini.pick".setup({})
 
 require "typst-preview".setup({
     open_cmd = 'firefox --new-window %s',
@@ -168,10 +171,6 @@ vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "<C-s>", ":w<CR>")
 
-vim.keymap.set("n", "<Tab>", ":tabn<CR>")
-vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
-vim.keymap.set("n", "<C-n>", ":tabe ")
-
 vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
@@ -179,3 +178,9 @@ vim.keymap.set("n", "<Leader>tp", ":TypstPreviewToggle<CR>")
 vim.keymap.set("n", "<Leader>tc", ":TypstPreviewFollowCursorToggle<CR>")
 
 vim.keymap.set("n", "N", "<cmd>lua vim.diagnostic.open_float()<cr>")
+
+vim.keymap.set("n", "<leader>ff", ":Pick files<CR>")
+vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
+vim.keymap.set("n", "<leader>fb", ":Pick buffers<CR>")
+vim.keymap.set("n", "<leader>fr", ":Pick resume<CR>")
+vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
