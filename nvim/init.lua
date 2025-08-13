@@ -36,7 +36,9 @@ vim.pack.add({
     { src = "https://github.com/folke/which-key.nvim" }
 })
 
-require "typst-preview".setup({})
+require "typst-preview".setup({
+    open_cmd = 'firefox --new-window %s',
+})
 
 require "blink.compat".setup({})
 
