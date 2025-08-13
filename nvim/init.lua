@@ -111,6 +111,31 @@ require('FTerm').setup({
     },
 })
 
+require('gitsigns').setup({
+    on_attach = function(bufnr)
+        vim.keymap.set("n", "<leader>gb", ":Gitsigns blame_line<CR>")
+        vim.keymap.set("n", "<leader>gd", ":Gitsigns diffthis main<CR>")
+
+        local gitsigns = require('gitsigns')
+
+        vim.keymap.set('n', ']c', function()
+            if vim.wo.diff then
+                vim.cmd.normal({']c', bang = true})
+            else
+                gitsigns.nav_hunk('next')
+            end
+        end)
+
+        vim.keymap.set('n', '[c', function()
+            if vim.wo.diff then
+                vim.cmd.normal({'[c', bang = true})
+            else
+                gitsigns.nav_hunk('prev')
+            end
+        end)
+    end
+})
+
 -- Set color scheme
 require("catppuccin").setup({
     transparent_background = true,
