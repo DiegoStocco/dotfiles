@@ -35,7 +35,15 @@ vim.pack.add({
     { src = 'https://github.com/catppuccin/nvim'},
     { src = "https://github.com/folke/which-key.nvim" },
     { src = "https://github.com/echasnovski/mini.pick" },
+    { src = "https://github.com/windwp/nvim-autopairs" },
 })
+
+-- setup auto brackets
+require "nvim-autopairs".setup({})
+local Rule = require('nvim-autopairs.rule')
+local npairs = require('nvim-autopairs')
+
+npairs.add_rule(Rule("$","$",{"tex", "latek", "typ", "typst"})) -- Inserto double $ in tex and typst files
 
 require "mini.pick".setup({})
 
