@@ -16,6 +16,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.o.clipboard = "unnamedplus" -- Yank to system clipboard
 vim.o.smoothscroll = true
 vim.o.termguicolors = true
+vim.o.ignorecase = true -- Ignore casing when searching
+vim.o.smartcase = true  -- Turn off Ignore case when a capital letter is detected
 
 vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig'},
