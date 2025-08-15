@@ -51,6 +51,10 @@ require "mini.pick".setup({})
 
 require "typst-preview".setup({
     open_cmd = 'firefox --new-window %s',
+    port = 12000,
+     dependencies_bin = {
+        ['tinymist'] = nil,
+    }
 })
 
 require "blink.compat".setup({})
