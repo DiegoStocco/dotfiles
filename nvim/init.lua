@@ -125,6 +125,7 @@ require('FTerm').setup({
     },
 })
 
+-- Setup keymaps for git files
 require('gitsigns').setup({
     on_attach = function(bufnr)
         vim.keymap.set("n", "<leader>gb", ":Gitsigns blame_line<CR>")
@@ -147,6 +148,15 @@ require('gitsigns').setup({
                 gitsigns.nav_hunk('prev')
             end
         end)
+
+        vim.keymap.set("n", "<leader>cr", function()
+            local openPop = io.popen(string.format('( cd $(dirname %s 2> /dev/null) 2> /dev/null && git rev-parse --show-toplevel 2>&1 )', vim.fn.expand("%:p") ), 'r')
+            local output = openPop:read('*all')
+            openPop:close()
+
+            if string.sub(output, 1, 1) == "/" then vim.cmd(string.format("cd %s", output)) end
+        end
+)
     end
 })
 
@@ -223,3 +233,7 @@ vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
 vim.keymap.set("n", "<leader>fb", ":Pick buffers<CR>")
 vim.keymap.set("n", "<leader>fr", ":Pick resume<CR>")
 vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
+
+vim.keymap.set("n", "<leader>ch", ":cd $HOME<CR>")
+vim.keymap.set("n", "<leader>ct", ":cd %:h<CR>")
+vim.keymap.set("n", "<leader>cb", ":cd -<CR>")
