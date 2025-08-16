@@ -50,7 +50,7 @@ npairs.add_rule(Rule("$","$",{"tex", "latek", "typ", "typst"})) -- Inserto doubl
 require "mini.pick".setup({})
 
 require "typst-preview".setup({
-    open_cmd = 'firefox --new-window %s',
+    open_cmd = 'if [ $(ps -aux | grep \'firefox -P APP\' | wc -l) = \'3\' ]; then firefox -P APP -url %s 2> /dev/null ; fi',
     port = 12000,
      dependencies_bin = {
         ['tinymist'] = nil,
