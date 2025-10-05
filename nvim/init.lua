@@ -128,12 +128,14 @@ require "blink.cmp".setup({
 
 -- Setup LSPs
 vim.lsp.enable({
-    'hls',
+    'arduino_language_server',
     'clangd',
-    'pyright',
     'glsl_analyzer',
-    'tinymist'
+    'hls',
+    'pyright',
+    'tinymist',
 })
+
 require('nvim-treesitter.configs').setup({ 
     highlight = { enable = true, },
     ensure_installed = { "bash", "c", "css", "cpp", "glsl", "haskell", "html", "javascript","lua", "markdown", "markdown_inline", "python", "typst" },
