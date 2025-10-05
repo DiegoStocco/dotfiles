@@ -242,11 +242,10 @@ vim.keymap.set("n", "<Leader>tc", ":TypstPreviewFollowCursorToggle<CR>")
 
 vim.keymap.set("n", "N", "<cmd>lua vim.diagnostic.open_float()<cr>")
 
-vim.keymap.set("n", "<leader>ff", ":Pick files<CR>")
-vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
-vim.keymap.set("n", "<leader>fb", ":Pick buffers<CR>")
-vim.keymap.set("n", "<leader>fr", ":Pick resume<CR>")
-vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
+vim.keymap.set("n", "<leader>f", ":Pick files<CR>")
+vim.keymap.set("n", "<leader>g", ":Pick grep_live<CR>")
+vim.keymap.set("n", "<leader>b", ":Pick buffers<CR>")
+vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
 
 vim.keymap.set("n", "<leader>ch", ":cd $HOME<CR>")
 vim.keymap.set("n", "<leader>ct", ":cd %:h<CR>")
