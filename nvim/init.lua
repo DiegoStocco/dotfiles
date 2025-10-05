@@ -52,8 +52,14 @@ require "neowiki".setup({
 require "nvim-autopairs".setup({})
 local Rule = require('nvim-autopairs.rule')
 local npairs = require('nvim-autopairs')
+local cond = require('nvim-autopairs.conds')
 
-npairs.add_rule(Rule("$","$",{"tex", "latek", "typ", "typst"})) -- Inserto double $ in tex and typst files
+npairs.add_rule(Rule("$","$",{"tex", "latek", "typ", "typst"}))
+npairs.add_rule(Rule(" "," ",{"tex", "latek", "typ", "typst"})
+    :with_pair(function (opts)
+        local pair = opts.line:sub(opts.col, opts.col + 1)
+        return vim.tbl_contains({ '$$' }, pair)
+    end))
 
 require "mini.pick".setup({})
 
