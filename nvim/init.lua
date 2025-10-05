@@ -40,6 +40,7 @@ vim.pack.add({
     { src = "https://github.com/windwp/nvim-autopairs" },
     { src = "https://github.com/echaya/neowiki.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
+    { src = "https://github.com/nvim-mini/mini.icons" },
 })
 
 -- setup neowiki
@@ -55,8 +56,14 @@ require "oil".setup({
         ["<C-h>"] = false,
         ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-v>"] = { "actions.select", opts = { vertical = true } },
-    }
+    },
+
+    win_options = {
+        cursorline = true,
+    },
 })
+
+require "mini.icons".setup({})
 
 -- setup auto brackets
 require "nvim-autopairs".setup({})
@@ -225,8 +232,8 @@ require("catppuccin").setup({
     custom_highlights = function(colors)
         return {
             CursorLine = { 
-                underline = true,
-                bg = "#000000",
+                -- underline = true,
+                -- bg = "#000000",
             },
         }
     end
