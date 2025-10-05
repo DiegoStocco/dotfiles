@@ -38,6 +38,14 @@ vim.pack.add({
     { src = "https://github.com/folke/which-key.nvim" },
     { src = "https://github.com/echasnovski/mini.pick" },
     { src = "https://github.com/windwp/nvim-autopairs" },
+    { src = "https://github.com/echaya/neowiki.nvim" },
+})
+
+-- setup neowiki
+require "neowiki".setup({
+    wiki_dirs = {
+      { name = "Wiki", path = "~/Programmi/wiki" },
+    },
 })
 
 -- setup auto brackets
@@ -112,7 +120,7 @@ vim.lsp.enable({
 })
 require('nvim-treesitter.configs').setup({ 
     highlight = { enable = true, },
-    ensure_installed = { "bash", "c", "css", "cpp", "glsl", "haskell", "html", "javascript","lua", "python", "typst" },
+    ensure_installed = { "bash", "c", "css", "cpp", "glsl", "haskell", "html", "javascript","lua", "markdown", "markdown_inline", "python", "typst" },
     indent = { enable = true, },
 })
 
@@ -237,3 +245,5 @@ vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>ch", ":cd $HOME<CR>")
 vim.keymap.set("n", "<leader>ct", ":cd %:h<CR>")
 vim.keymap.set("n", "<leader>cb", ":cd -<CR>")
+
+vim.keymap.set("n", "<leader>ww", "<cmd>lua require('neowiki').open_wiki()<cr>")
