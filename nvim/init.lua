@@ -39,6 +39,7 @@ vim.pack.add({
     { src = "https://github.com/echasnovski/mini.pick" },
     { src = "https://github.com/windwp/nvim-autopairs" },
     { src = "https://github.com/echaya/neowiki.nvim" },
+    { src = "https://github.com/stevearc/oil.nvim" },
 })
 
 -- setup neowiki
@@ -46,6 +47,15 @@ require "neowiki".setup({
     wiki_dirs = {
       { name = "Wiki", path = "~/Programmi/wiki" },
     },
+})
+
+-- Setup Oil
+require "oil".setup({
+    keymaps = {
+        ["<C-h>"] = false,
+        ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
+        ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+    }
 })
 
 -- setup auto brackets
@@ -250,5 +260,7 @@ vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>ch", ":cd $HOME<CR>")
 vim.keymap.set("n", "<leader>ct", ":cd %:h<CR>")
 vim.keymap.set("n", "<leader>cb", ":cd -<CR>")
+
+vim.keymap.set("n", "<leader>o", ":Oil<CR>")
 
 vim.keymap.set("n", "<leader>ww", "<cmd>lua require('neowiki').open_wiki()<cr>")
