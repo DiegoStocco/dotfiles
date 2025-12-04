@@ -12,8 +12,8 @@ vim.o.undofile = true
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.o.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
--- vim.o.cursorline = true
-vim.o.clipboard = "unnamedplus" -- Yank to system clipboard
+vim.o.cursorline = true
+-- vim.o.clipboard = "unnamedplus" -- Yank to system clipboard
 vim.o.smoothscroll = true
 vim.o.termguicolors = true
 vim.o.ignorecase = true -- Ignore casing when searching
@@ -41,6 +41,8 @@ vim.pack.add({
     { src = "https://github.com/echaya/neowiki.nvim" },
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/nvim-mini/mini.icons" },
+    { src = 'https://github.com/nvim-lua/plenary.nvim' },
+    { src = 'https://github.com/Julian/lean.nvim' },
 })
 
 -- setup neowiki
@@ -137,11 +139,25 @@ require "blink.cmp".setup({
 vim.lsp.enable({
     'arduino_language_server',
     'clangd',
+    'css',
     'glsl_analyzer',
     'hls',
+    'html',
     'pyright',
     'tinymist',
 })
+
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.html.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
 
 require('nvim-treesitter.configs').setup({ 
     highlight = { enable = true, },
@@ -241,6 +257,12 @@ require("catppuccin").setup({
 vim.cmd.colorscheme "catppuccin-mocha"
 
 
+-- Setup lean
+require("lean").setup({
+    abbreviations = { builtin = true },
+    mappings = true,
+})
+
 -- VimTeX options
 vim.g.vimtex_view_method = "general"
 vim.g.vimtex_view_general_viewer = "okular"
@@ -259,7 +281,7 @@ vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
 vim.keymap.set("n", "<Leader>tp", ":TypstPreviewToggle<CR>")
 vim.keymap.set("n", "<Leader>tc", ":TypstPreviewFollowCursorToggle<CR>")
 
-vim.keymap.set("n", "N", "<cmd>lua vim.diagnostic.open_float()<cr>")
+vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>")
 
 vim.keymap.set("n", "<leader>f", ":Pick files<CR>")
 vim.keymap.set("n", "<leader>g", ":Pick grep_live<CR>")
@@ -273,3 +295,11 @@ vim.keymap.set("n", "<leader>cb", ":cd -<CR>")
 vim.keymap.set("n", "<leader>o", ":Oil<CR>")
 
 vim.keymap.set("n", "<leader>ww", "<cmd>lua require('neowiki').open_wiki()<cr>")
+
+vim.keymap.set({"n", "v"}, "<leader>n", ":norm ")
+
+vim.keymap.set({"n", "v"}, "<leader>p", "\"+p")
+vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")
