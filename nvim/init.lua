@@ -26,14 +26,14 @@ vim.pack.add({
     },
     { src = 'https://github.com/Saghen/blink.compat'},
     { src = 'https://github.com/micangl/cmp-vimtex'},
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter',},
+    -- { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
     { src = 'https://github.com/lervag/vimtex' },
     { src = "https://github.com/chomosuke/typst-preview.nvim",
         version = vim.version.range('1.*'),
     },
     -- { src = 'https://github.com/L3MON4D3/LuaSnip' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-    { src = 'https://github.com/numToStr/FTerm.nvim', },
+    { src = 'https://github.com/numToStr/FTerm.nvim' },
     { src = 'https://github.com/catppuccin/nvim'},
     { src = "https://github.com/folke/which-key.nvim" },
     { src = "https://github.com/echasnovski/mini.pick" },
@@ -59,6 +59,15 @@ require "oil".setup({
         ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-v>"] = { "actions.select", opts = { vertical = true } },
     },
+
+    columns = {
+    "icon",
+    "permissions",
+    "size",
+    -- "mtime",
+  },
+
+    skip_confirm_for_simple_edits = true,
 
     win_options = {
         cursorline = true,
@@ -151,22 +160,20 @@ vim.lsp.enable({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.html.setup {
+vim.lsp.config("html", {
   capabilities = capabilities,
-}
-
-require'lspconfig'.cssls.setup {
-  capabilities = capabilities,
-}
-
-require('nvim-treesitter.configs').setup({ 
-    highlight = { enable = true, },
-    ensure_installed = { "bash", "c", "css", "cpp", "glsl", "haskell", "html", "javascript","lua", "markdown", "markdown_inline", "python", "typst" },
-    indent = { enable = true, },
 })
+
+vim.lsp.config("cssls", {
+  capabilities = capabilities,
+})
+
+-- Treesitter configuration
+-- require('nvim-treesitter').install { "bash", "c", "css", "cpp", "glsl", "haskell", "html", "javascript", "lua", "markdown", "markdown_inline", "python", "typst" }
 
 -- Setup floating terminal
 require('FTerm').setup({
+    cmd = "fish",
     border = 'rounded',
     dimensions  = {
         height = 0.6,
@@ -215,7 +222,7 @@ require("catppuccin").setup({
     integrations = {
         cmp = true,
         gitsigns = true,
-        treesitter = true,
+        -- treesitter = true,
         -- harpoon = true,
         -- telescope = true,
         -- mason = true,
@@ -271,9 +278,7 @@ vim.g.vimtex_indent_enabled = 0
 
 -- Custom keybindings
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.keymap.set("n", "<C-s>", ":w<CR>")
+vim.g.maplocalleader = "  "
 
 vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
@@ -283,8 +288,8 @@ vim.keymap.set("n", "<Leader>tc", ":TypstPreviewFollowCursorToggle<CR>")
 
 vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>")
 
-vim.keymap.set("n", "<leader>f", ":Pick files<CR>")
-vim.keymap.set("n", "<leader>g", ":Pick grep_live<CR>")
+vim.keymap.set("n", "<leader>ff", ":Pick files<CR>")
+vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>")
 vim.keymap.set("n", "<leader>b", ":Pick buffers<CR>")
 vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
 
@@ -301,5 +306,10 @@ vim.keymap.set({"n", "v"}, "<leader>n", ":norm ")
 vim.keymap.set({"n", "v"}, "<leader>p", "\"+p")
 vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
 
+-- Moving selected text (pandaa thx)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Other thing from pandaa
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("v", "<leader>s", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
