@@ -43,6 +43,10 @@ vim.pack.add({
     { src = "https://github.com/nvim-mini/mini.icons" },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/Julian/lean.nvim' },
+    { src = 'https://github.com/mfussenegger/nvim-dap' },
+    { src = 'https://github.com/rcarriga/nvim-dap-ui' },
+    { src = 'https://github.com/nvim-neotest/nvim-nio' },
+    { src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
 })
 
 -- setup neowiki
@@ -92,11 +96,12 @@ npairs.add_rule(Rule(" "," ",{"tex", "latek", "typ", "typst"})
 require "mini.pick".setup({})
 
 require "typst-preview".setup({
-    open_cmd = 'if [ $(ps -aux | grep \'firefox -P APP\' | wc -l) = \'3\' ]; then firefox -P APP -url %s 2> /dev/null ; fi',
+    open_cmd = 'firefox -P APP -url %s 2> /dev/null',
     port = 12000,
-     dependencies_bin = {
-        ['tinymist'] = nil,
-    }
+    extra_args = { "--partial-rendering=true" },
+    dependencies_bin = {
+        ['tinymist'] = "/usr/bin/tinymist",
+    },
 })
 
 require "blink.compat".setup({})
@@ -153,6 +158,7 @@ vim.lsp.enable({
     'hls',
     'html',
     'pyright',
+    'rust_analyzer',
     'tinymist',
 })
 
@@ -270,6 +276,54 @@ require("lean").setup({
     mappings = true,
 })
 
+-- Setup debugger with DAP
+require("nvim-dap-virtual-text").setup()
+local ui = require("dapui")
+local dap = require("dap")
+
+dap.adapters.codelldb = {
+  type = "executable",
+  command = "codelldb",
+}
+
+-- dap.adapters.gdb = {
+--     type = "executable",
+--     command = "gdb",
+--     args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+-- }
+
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  },
+}
+-- Debugger UI
+
+
+ui.setup()
+
+vim.fn.sign_define("DapBreakpoint", { text = "🔴" })
+
+dap.listeners.before.attach.dapui_config = function()
+    ui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+    ui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+    ui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+    ui.close()
+end
+
 -- VimTeX options
 vim.g.vimtex_view_method = "general"
 vim.g.vimtex_view_general_viewer = "okular"
@@ -313,3 +367,36 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Other thing from pandaa
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("v", "<leader>s", ":s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+
+-- DAP things
+vim.keymap.set("n", "<A-d>t", function () dap.toggle_breakpoint() end )
+vim.keymap.set("n", "<A-d><A-t>", function () dap.toggle_breakpoint() end )
+
+vim.keymap.set("n", "<A-d>c", function () dap.continue() end )
+vim.keymap.set("n", "<A-d><A-c>", function () dap.continue() end )
+
+vim.keymap.set("n", "<A-d>j", function () dap.step_over() end )
+vim.keymap.set("n", "<A-d><A-j>", function () dap.step_over() end )
+
+vim.keymap.set("n", "<A-d>l", function () dap.step_into() end )
+vim.keymap.set("n", "<A-d><A-l>", function () dap.step_into() end )
+
+vim.keymap.set("n", "<A-d>h", function () dap.step_out() end )
+vim.keymap.set("n", "<A-d><A-h>", function () dap.step_out() end )
+
+vim.keymap.set("n", "<A-d>d", function () dap.list_breakpoints() end )
+vim.keymap.set("n", "<A-d><A-d>", function () dap.list_breakpoints() end )
+
+vim.keymap.set("n", "<A-d>r", function () dap.repl.open() end )
+vim.keymap.set("n", "<A-d><A-r>", function () dap.repl.open() end )
+
+vim.keymap.set("n", "<A-d>q", function()
+          require("dap").terminate()
+          require("dapui").close()
+          require("nvim-dap-virtual-text").toggle()
+      end )
+vim.keymap.set("n", "<A-d><A-q>", function()
+          require("dap").terminate()
+          require("dapui").close()
+          require("nvim-dap-virtual-text").toggle()
+      end )

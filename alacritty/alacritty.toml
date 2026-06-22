@@ -1,0 +1,17 @@
+[general]
+import = [
+    "~/.config/alacritty/smoooooth.toml"
+]
+
+[window]
+opacity = 0.8
+blur = true
+
+[font]
+normal = {family = "JetBrainsMono Nerd Font Mono", style = "Regular"}
+
+[terminal]
+shell = { program = "/bin/fish" }
+
+[mouse]
+hide_when_typing = true
