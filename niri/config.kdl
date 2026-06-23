@@ -317,6 +317,13 @@ window-rule {
     default-column-width {}
 }
 
+blur {
+    passes 3
+    offset 6
+    noise 0.05
+    saturation 1.5
+}
+
 // Blur alacritty
 window-rule {
     match app-id="^Alacritty$"
@@ -339,6 +346,7 @@ layer-rule {
 // Blur swaync
 layer-rule {
     match namespace="^swaync-control-center$"
+    // match namespace="^swaync-notification-window$"
 
     background-effect {
         blur true
