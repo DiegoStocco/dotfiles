@@ -70,3 +70,7 @@ tooltip label {
 #idle_inhibitor {
     font-size: 18px;
 }
+
+#custom-notification {
+    padding-right: 8px;
+}

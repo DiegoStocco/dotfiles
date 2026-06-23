@@ -9,7 +9,7 @@
 	"niri/workspaces"
 	    ],
 	    "modules-center" : [
-		    "niri/window"
+            "clock"
 	    ],
 	    "modules-right": [
 		    "idle_inhibitor",
@@ -22,8 +22,8 @@
 		    // "keyboard-state",
 		    "battery",
 		    "tray",
-		    "clock",
-		    "custom/power"
+		    // "clock",
+		    "custom/notification"
 	    ],
 	    "keyboard-state": {
 		    "numlock": true,
@@ -35,7 +35,7 @@
 		    }
 	    },
 	    "idle_inhibitor": {
-		    "format": "{icon}",
+		    "format": "<big>{icon}</big>",
 		    "format-icons": {
 			    "activated": "",
 			    "deactivated": ""
@@ -51,7 +51,8 @@
 	    },
 	    "clock": {
 		    // "timezone": "America/New_York",
-		    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "format": "{:L%H:%M | %A %e %B}",
+		    "tooltip-format": "{calendar}",
 		    "format-alt": "{:%Y-%m-%d}"
 	    },
 	    "cpu": {
@@ -71,7 +72,7 @@
 	    },
 	    "backlight": {
 		    // "device": "acpi_video1",
-		    "format": "{percent}% {icon}",
+		    "format": "{percent}% <big>{icon}</big>",
 		    "format-icons": ["", "", "", "", "", "", "", "", ""]
 	    },
 	    "battery": {
@@ -80,11 +81,11 @@
 			    "warning": 30,
 			    "critical": 15
 		    },
-		    "format": "{capacity}% {icon}",
-		    "format-full": "{capacity}% {icon}",
-		    "format-charging": "{capacity}% 󰃨",
-		    "format-plugged": "{capacity}% ",
-		    "format-alt": "{time} {icon}",
+		    "format": "{capacity}% <big>{icon}</big>",
+		    "format-full": "{capacity}% <big>{icon}</big>",
+		    "format-charging": "{capacity}% <big>󰃨</big>",
+		    "format-plugged": "{capacity}% <big></big>",
+		    "format-alt": "{time} <big></big>",
 		    // "format-good": "", # An empty format will hide the module
 		    // "format-full": "",
 		    "format-icons": ["", "", "", "", ""]
@@ -94,21 +95,21 @@
 	    },
 	    "network": {
 		    // "interface": "wlp2*", # (Optional) To force the use of this interface
-		    "format-wifi": "{essid} ({signalStrength}%) ",
-		    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-		    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-		    "format-linked": "{ifname} (No IP) 󰊗",
-		    "format-disconnected": "Disconnected ⚠",
-		    "format-alt": "{ifname}= {ipaddr}/{cidr}"
+		    "format-wifi": "{essid} ({signalStrength}%) <big></big>",
+		    "format-ethernet": "{ipaddr}/{cidr} <big>󰊗</big>",
+		    "tooltip-format": "{ifname} via {gwaddr} <big>󰊗</big>",
+		    "format-linked": "{ifname} (No IP) <big>󰊗</big>",
+		    "format-disconnected": "Disconnected <big>⚠</big>",
+		    "format-alt": "{ifname}: {ipaddr}/{cidr}"
 	    },
 	    "pulseaudio": {
 		    "scroll-step": 1, // %, can be a float
-		    "format": "{volume}% {icon} {format_source}",
-		    "format-bluetooth": "{volume}% {icon} {format_source}",
-		    "format-bluetooth-muted": "󰅶 {icon} {format_source}",
+		    "format": "{volume}% <big>{icon}</big> {format_source}",
+		    "format-bluetooth": "{volume}% <big>{icon}</big><big></span> {format_source}",
+		    "format-bluetooth-muted": "󰅶 <big>{icon}</big><big></span> {format_source}",
 		    "format-muted": "󰅶 {format_source}",
-		    "format-source": "{volume}% ",
-		    "format-source-muted": "",
+		    "format-source": "{volume}% <big></big>",
+		    "format-source-muted": "<big></big>",
 		    "format-icons": {
 			    "headphone": "",
 			    "hands-free": "󰂑",
@@ -143,5 +144,25 @@
 			    "suspend": "systemctl suspend",
 			    "hibernate": "systemctl hibernate"
 		    }
-	    }
+	    },
+        "custom/notification": {
+          "tooltip": true,
+          "format": "<big>{icon}</big>",
+          "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": "󰪑",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+          },
+          "return-type": "json",
+          "exec-if": "which swaync-client",
+          "exec": "swaync-client -swb",
+          "on-click": "swaync-client -t -sw",
+          "on-click-right": "swaync-client -d -sw",
+          "escape": true
+        }
 }
