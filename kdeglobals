@@ -109,6 +109,8 @@ ColorSchemeHash=6f1a610db41ddac6068e241961601df443dc1a4d
 Name=Darkly3
 TintFactor=0.15
 shadeSortColumn=true
+TerminalApplication=alacritty
+TerminalService=Alacritty.desktop
 
 [KDE]
 contrast=2
