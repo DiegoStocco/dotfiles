@@ -344,6 +344,35 @@ layer-rule {
         blur true
         xray false
     }
+    geometry-corner-radius 12
+}
+
+// Show windows that are screencasted
+
+window-rule {
+    match is-window-cast-target=true
+    focus-ring {
+        on
+        width 3
+        active-color "#ff3422"
+        inactive-color "#ee2211"
+        urgent-color "#ff3422"
+    }
+    border {
+        on
+        width 1
+        active-color "#ff3422"
+        inactive-color "#ee2211"
+        urgent-color "#ff3422"
+    }
+    shadow {
+        on
+        softness 40
+        spread 5
+        offset x=0 y=5
+        draw-behind-window false
+        color "#ff000064"
+    }
 }
 
 window-rule{
