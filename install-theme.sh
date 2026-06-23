@@ -6,6 +6,7 @@ HERE=$(dirname $(realpath -s $0))
 
 # GTK Theme
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 mkdir -p $HOME/.config/gtk-3.0/
 ln -sf $HERE/gtk-3.0/settings.ini $HOME/.config/gtk-3.0/
 mkdir -p $HOME/.config/gtk-4.0/
