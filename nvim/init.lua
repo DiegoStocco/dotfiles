@@ -271,10 +271,10 @@ vim.cmd.colorscheme "catppuccin-mocha"
 
 
 -- Setup lean
-require("lean").setup({
+vim.g.lean_config = {
     abbreviations = { builtin = true },
     mappings = true,
-})
+}
 
 -- Setup debugger with DAP
 require("nvim-dap-virtual-text").setup()
