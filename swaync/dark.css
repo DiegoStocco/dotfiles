@@ -1,9 +1,9 @@
 @define-color dark #24283b;
-@define-color darkOP rgba(36,40,59,0.3);
-@define-color darkOP2 rgba(36,40,59,0.5);
+@define-color darkOP rgba(36,40,59,1);
+@define-color darkOP2 rgba(36,40,59,0.9);
 @define-color light #c0caf5;
-@define-color lightOP rgba(192, 202, 245,0.3);
-@define-color lightOP2 rgba(192, 202, 245,0.7);
+@define-color lightOP rgba(192, 202, 245,0.8);
+@define-color lightOP2 rgba(192, 202, 245,0.9);
 @define-color lightCursor #bbbbbb;
 @define-color dark2 #2e3c64;
 @define-color light2 #a9b1d6;
@@ -21,7 +21,7 @@
 * {
     all: unset;
     font-size: 14px;
-    font-family: "Inter Display", "RobotoMono Nerd Font Propo";
+    font-family: "JetBrainsMono Nerd Font Mono", "Inter Display", "RobotoMono Nerd Font Propo";
     transition: 200ms;
 }
 
@@ -30,7 +30,7 @@
     border-radius: 12.6px;
     border: 4px solid @lightOP;
     margin: 8px;
-    background: @darkOP;
+    background: @dark;
     padding: 0;
 }
 
