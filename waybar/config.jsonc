@@ -51,7 +51,7 @@
 	    },
 	    "clock": {
 		    // "timezone": "America/New_York",
-            "format": "{:L%H:%M | %A %e %B}",
+            "format": "{:L%H:%M | %A%e %B}",
 		    "tooltip-format": "{calendar}",
 		    "format-alt": "{:%Y-%m-%d}"
 	    },
@@ -105,15 +105,15 @@
 	    "pulseaudio": {
 		    "scroll-step": 1, // %, can be a float
 		    "format": "{volume}% <big>{icon}</big> {format_source}",
-		    "format-bluetooth": "{volume}% <big>{icon}</big><big></span> {format_source}",
+		    "format-bluetooth": "{volume}% <big>{icon}</big>  {format_source}",
 		    "format-bluetooth-muted": "󰅶 <big>{icon}</big><big></span> {format_source}",
 		    "format-muted": "󰅶 {format_source}",
 		    "format-source": "{volume}% <big></big>",
 		    "format-source-muted": "<big></big>",
 		    "format-icons": {
 			    "headphone": "",
-			    "hands-free": "󰂑",
-			    "headset": "󰂑",
+			    "hands-free": "",
+			    "headset": "",
 			    "phone": "",
 			    "portable": "",
 			    "car": "",
