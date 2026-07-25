@@ -1,4 +1,6 @@
 if status is-interactive
+    set -gx EDITOR 'nvim'
+
     alias ls='ls --color=auto'
     alias l='ls --color=auto'
     alias ll='ls --color=auto -lh'
@@ -9,6 +11,7 @@ if status is-interactive
     alias sv='sudo -e'
     alias neofetch='fastfetch'
     alias :q='exit'
-    alias ccp='g++ -Wall -Wextra -Wfloat-equal -Wshadow -pedantic -Og -g -fsanitize=address,undefined -std=c++23 -DLOCAL'
+
+    abbr ccp 'g++ -Wall -Wextra -Wfloat-equal -Wshadow -pedantic -I$HOME/.local/include -Og -g -fsanitize=address,undefined -fstack-protector-strong -fno-omit-frame-pointer -fno-sanitize-recover=all -std=c++23 -DLOCAL'
 
 end
