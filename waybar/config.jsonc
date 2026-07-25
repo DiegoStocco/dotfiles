@@ -6,7 +6,8 @@
 "spacing" : 15, // Gaps between modules (4px)
 // Choose the order of the modules
 "modules-left": [
-	"niri/workspaces"
+        "custom/power",
+        "niri/workspaces"
 	    ],
 	    "modules-center" : [
             "clock"
@@ -51,7 +52,7 @@
 	    },
 	    "clock": {
 		    // "timezone": "America/New_York",
-            "format": "{:L%H:%M | %A%e %B}",
+            "format": "{:L%H:%M | %A %e %B}",
 		    "tooltip-format": "{calendar}",
 		    "format-alt": "{:%Y-%m-%d}"
 	    },
@@ -134,13 +135,14 @@
 		    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" # Filter player based on name
 	    },
 	    "custom/power": {
-		    "format" : "⏻ ",
+		    "format" : " ⏻",
 		    "tooltip": false,
 		    "menu": "on-click",
 		    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
 		    "menu-actions": {
-			    "shutdown": "shutdown",
+			    "shutdown": "poweroff",
 			    "reboot": "reboot",
+			    "reboot-to-firm": "systemctl reboot --firmware-setup",
 			    "suspend": "systemctl suspend",
 			    "hibernate": "systemctl hibernate"
 		    }
