@@ -20,7 +20,8 @@ input {
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
 
-	    layout "it"
+            options "compose:rctrl"
+                layout "it"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -33,11 +34,12 @@ input {
     touchpad {
         // off
         tap
-        // dwt
+        dwt
         // dwtp
         // drag false
         // drag-lock
         natural-scroll
+        click-method "clickfinger"
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
@@ -266,8 +268,8 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-// spawn-at-startup "waybar"
+spawn-at-startup "kdeconnect-indicator"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -289,6 +291,10 @@ prefer-no-csd
 // The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/Immagini/Schermate/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
+environment {
+    XDG_MENU_PREFIX "arch-"
+}
+
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
 
@@ -307,6 +313,13 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+// Set receiving file dialog od kdeconnect as floating
+window-rule {
+    match app-id="^org.kde.kdeconnect.daemon$"
+    
+    open-floating true
+}
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -320,7 +333,7 @@ window-rule {
 blur {
     passes 3
     offset 6
-    noise 0.05
+    noise 0.02
     saturation 1.5
 }
 
@@ -330,6 +343,16 @@ window-rule {
 
     background-effect {
         blur true
+    }
+}
+
+// Blur dolphin configuration window
+window-rule {
+    match app-id="^org.kde.dolphin$" is-floating=true
+
+    background-effect {
+        blur true
+        xray false
     }
 }
 
@@ -439,13 +462,15 @@ binds {
     Super+E hotkey-overlay-title="Open file explorer: dolphin" { spawn "dolphin"; }
     Super+N hotkey-overlay-title="Open Notification center: swaync" { spawn "swaync-client" "-t" "-sw"; }
 
-    // Calculator
-    XF86Calculator hotkey-overlay-title="Calculator"{ spawn-sh "= -- --width 50"; }
+    // Screencasting
+    Super+Alt+W { set-dynamic-cast-window; }
+    Super+Alt+M { set-dynamic-cast-monitor; }
+    Super+Alt+C { clear-dynamic-cast-target; }
 
-    // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
-    // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-    // For example, this is a standard bind to toggle the screen reader (orca).
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+    // Calculator
+    Super+A hotkey-overlay-title="Calculator"{ spawn-sh "~/.config/niri/calc.sh"; }
+
+    Super+C { spawn-sh "cliphist list | fuzzel --width 100 --dmenu | cliphist decode | wl-copy"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -481,8 +506,8 @@ binds {
     Mod+Up    { focus-window-up; }
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
+    // Mod+J     { focus-window-down; }
+    // Mod+K     { focus-window-up; }
     Mod+L     { focus-column-right; }
 
     Mod+Ctrl+Left  { move-column-left; }
@@ -490,8 +515,8 @@ binds {
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
     Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+J     { move-window-down; }
-    Mod+Ctrl+K     { move-window-up; }
+    // Mod+Ctrl+J     { move-window-down; }
+    // Mod+Ctrl+K     { move-window-up; }
     Mod+Ctrl+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
@@ -534,12 +559,12 @@ binds {
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
+    Mod+J              { focus-workspace-down; }
+    Mod+K              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Ctrl+J         { move-column-to-workspace-down; }
+    Mod+Ctrl+K         { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
