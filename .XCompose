@@ -1,0 +1,193 @@
+include "%L"
+
+<Multi_key> <g> <e>                 : "≥"
+<Multi_key> <greater> <equal>       : "≥"
+<Multi_key> <l> <e>                 : "≤"
+<Multi_key> <less> <equal>          : "≤"
+<Multi_key> <n> <e>                 : "≠"
+<Multi_key> <exclam> <equal>        : "≠"
+<Multi_key> <i> <s> <o>             : "≌"
+<Multi_key> <equal> <equal>         : "≌"
+<Multi_key> <c> <o> <n>             : "≡"
+
+<Multi_key> <x> <o> <r>             : "⊕"
+
+<Multi_key> <i> <n> <f>             : "∞"
+
+<Multi_key> <t> <o> <p>             : "⊤"
+<Multi_key> <b> <o> <t>             : "⊥"
+<Multi_key> <n> <o> <t>             : "¬"
+
+
+<Multi_key> <p> <m>                 : "±"
+<Multi_key> <plus> <minus>          : "±"
+<Multi_key> <m> <p>                 : "∓"
+<Multi_key> <minus> <plus>          : "∓"
+
+<Multi_key> <i> <n>                 : "∈"
+<Multi_key> <n> <i> <n>             : "∉"
+<Multi_key> <v> <o> <i> <d>         : "∅"
+
+<Multi_key> <a> <l>                 : "∀"
+<Multi_key> <e> <x>                 : "∃"
+<Multi_key> <n> <e> <x>             : "∄"
+<Multi_key> <exclam> <e> <x>        : "∄"
+
+<Multi_key> <i> <n> <t>             : "∫"
+<Multi_key> <i> <i> <n> <t>         : "∬"
+<Multi_key> <i> <i> <i> <n> <t>     : "∭"
+<Multi_key> <c> <i> <n> <t>         : "∮"
+
+<Multi_key> <u> <n> <i> <o> <n>     : "⋃"
+<Multi_key> <i> <n> <t> <e> <r>     : "⋂"
+
+<Multi_key> <s> <q> <r> <t>         : "√"
+<Multi_key> <c> <b> <r> <t>         : "∛"
+
+<Multi_key> <a> <n> <g>             : "∠"
+<Multi_key> <d> <a> <n> <g>         : "∡"
+
+<Multi_key> <H> <H>                 : "ℍ"
+
+<Multi_key> <s> <f>                 : "⎣"
+<Multi_key> <e> <f>                 : "⎦"
+<Multi_key> <s> <c>                 : "⎡"
+<Multi_key> <e> <c>                 : "⎤"
+
+<Multi_key> <i> <m> <p>             : "⇒"
+<Multi_key> <i> <f> <f>             : "⇔"
+
+<Multi_key> <c> <o> <n> <t>         : "↯"
+
+# superscripts
+<Multi_key> <asciicircum> <0> : "⁰" U2070    # [ICONIC] Superscript zero
+<Multi_key> <asciicircum> <1> : "¹" U00B9    # [ICONIC] Superscript one
+<Multi_key> <asciicircum> <2> : "²" U00B2    # [ICONIC] Superscript two
+<Multi_key> <asciicircum> <3> : "³" U00B3    # [ICONIC] Superscript three
+<Multi_key> <asciicircum> <4> : "⁴" U2074    # [ICONIC] Superscript four
+<Multi_key> <asciicircum> <5> : "⁵" U2075    # [ICONIC] Superscript five
+<Multi_key> <asciicircum> <6> : "⁶" U2076    # [ICONIC] Superscript six
+<Multi_key> <asciicircum> <7> : "⁷" U2077    # [ICONIC] Superscript seven
+<Multi_key> <asciicircum> <8> : "⁸" U2078    # [ICONIC] Superscript eight
+<Multi_key> <asciicircum> <9> : "⁹" U2079    # [ICONIC] Superscript nine
+<Multi_key> <asciicircum> <plus> : "⁺" U207A    # [ICONIC] Superscript plus
+<Multi_key> <asciicircum> <minus> : "⁻" U207B    # [ICONIC] Superscript minus
+<Multi_key> <asciicircum> <equal> : "⁼" U207C    # [ICONIC] Superscript equals
+<Multi_key> <asciicircum> <parenleft> : "⁽" U207D    # [ICONIC] Superscript left parenthesis
+<Multi_key> <asciicircum> <parenright> : "⁾" U207E    # [ICONIC] Superscript right parenthesis
+# superscript letters
+<Multi_key> <asciicircum> <a> : "ᵃ" U1D43    # [ICONIC] Superscript a
+<Multi_key> <asciicircum> <b> : "ᵇ" U1D47    # [ICONIC] Superscript b
+<Multi_key> <asciicircum> <c> : "ᶜ" U1D9C    # [ICONIC] Superscript c
+<Multi_key> <asciicircum> <d> : "ᵈ" U1D48    # [ICONIC] Superscript d
+<Multi_key> <asciicircum> <e> : "ᵉ" U1D49    # [ICONIC] Superscript e
+<Multi_key> <asciicircum> <f> : "ᶠ" U1DA0    # [ICONIC] Superscript f
+<Multi_key> <asciicircum> <g> : "ᵍ" U1D4D    # [ICONIC] Superscript g
+<Multi_key> <asciicircum> <h> : "ʰ" U02B0    # [ICONIC] Superscript h
+<Multi_key> <asciicircum> <i> : "ⁱ" U2071    # [ICONIC] Superscript i
+<Multi_key> <asciicircum> <j> : "ʲ" U02B2    # [ICONIC] Superscript j
+<Multi_key> <asciicircum> <k> : "ᵏ" U1D4F    # [ICONIC] Superscript k
+<Multi_key> <asciicircum> <l> : "ˡ" U02E1    # [ICONIC] Superscript l
+<Multi_key> <asciicircum> <m> : "ᵐ" U1D50    # [ICONIC] Superscript m
+<Multi_key> <asciicircum> <n> : "ⁿ" U207F    # [ICONIC] Superscript n
+<Multi_key> <asciicircum> <o> : "ᵒ" U1D52    # [ICONIC] Superscript o
+<Multi_key> <asciicircum> <p> : "ᵖ" U1D56    # [ICONIC] Superscript p
+<Multi_key> <asciicircum> <r> : "ʳ" U02B3    # [ICONIC] Superscript r
+<Multi_key> <asciicircum> <s> : "ˢ" U02E2    # [ICONIC] Superscript s
+<Multi_key> <asciicircum> <t> : "ᵗ" U1D57    # [ICONIC] Superscript t
+<Multi_key> <asciicircum> <u> : "ᵘ" U1D58    # [ICONIC] Superscript u
+<Multi_key> <asciicircum> <v> : "ᵛ" U1D5B    # [ICONIC] Superscript v
+<Multi_key> <asciicircum> <w> : "ʷ" U02B7    # [ICONIC] Superscript w
+<Multi_key> <asciicircum> <x> : "ˣ" U02E3    # [ICONIC] Superscript x
+<Multi_key> <asciicircum> <y> : "ʸ" U02B8    # [ICONIC] Superscript y
+<Multi_key> <asciicircum> <z> : "ᶻ" U1DBB    # [ICONIC] Superscript z
+
+# subscripts
+# subscripts 0–9, + - = ( )
+<Multi_key> <underscore> <0> : "₀" U2080    # [ICONIC] Subscript zero
+<Multi_key> <underscore> <1> : "₁" U2081    # [ICONIC] Subscript one
+<Multi_key> <underscore> <2> : "₂" U2082    # [ICONIC] Subscript two
+<Multi_key> <underscore> <3> : "₃" U2083    # [ICONIC] Subscript three
+<Multi_key> <underscore> <4> : "₄" U2084    # [ICONIC] Subscript four
+<Multi_key> <underscore> <5> : "₅" U2085    # [ICONIC] Subscript five
+<Multi_key> <underscore> <6> : "₆" U2086    # [ICONIC] Subscript six
+<Multi_key> <underscore> <7> : "₇" U2087    # [ICONIC] Subscript seven
+<Multi_key> <underscore> <8> : "₈" U2088    # [ICONIC] Subscript eight
+<Multi_key> <underscore> <9> : "₉" U2089    # [ICONIC] Subscript nine
+<Multi_key> <underscore> <plus> : "₊" U208A    # [ICONIC] Subscript plus
+<Multi_key> <underscore> <minus> : "₋" U208B    # [ICONIC] Subscript minus
+<Multi_key> <underscore> <equal> : "₌" U208C    # [ICONIC] Subscript equals
+<Multi_key> <underscore> <parenleft> : "₍" U208D    # [ICONIC] Subscript left parenthesis
+<Multi_key> <underscore> <parenright> : "₎" U208E    # [ICONIC] Subscript right parenthesis
+# subscript letters available in Unicode (single underscore for subscripts)
+<Multi_key> <underscore> <a> : "ₐ" U2090    # [ICONIC] Subscript a
+<Multi_key> <underscore> <e> : "ₑ" U2091    # [ICONIC] Subscript e
+<Multi_key> <underscore> <o> : "ₒ" U2092    # [ICONIC] Subscript o
+# MACRONS: Double underscore (ergonomic choice - subscripts more common than macrons)
+# Standard Compose uses _a for macron, but we swap it for subscripts (LaTeX convention)
+# Macrons still accessible via __ instead of _
+<Multi_key> <underscore> <underscore> <a> : "ā" U0101    # [ICONIC] a with macron
+<Multi_key> <underscore> <underscore> <e> : "ē" U0113    # [ICONIC] e with macron
+<Multi_key> <underscore> <underscore> <o> : "ō" U014D    # [ICONIC] o with macron
+<Multi_key> <underscore> <h> : "ₕ" U2095    # [ICONIC] Subscript h
+<Multi_key> <underscore> <i> : "ᵢ" U1D62    # [ICONIC] Subscript i
+<Multi_key> <underscore> <j> : "ⱼ" U2C7C    # [ICONIC] Subscript j
+<Multi_key> <underscore> <k> : "ₖ" U2096    # [ICONIC] Subscript k
+<Multi_key> <underscore> <l> : "ₗ" U2097    # [ICONIC] Subscript l
+<Multi_key> <underscore> <m> : "ₘ" U2098    # [ICONIC] Subscript m
+<Multi_key> <underscore> <n> : "ₙ" U2099    # [ICONIC] Subscript n
+<Multi_key> <underscore> <p> : "ₚ" U209A    # [ICONIC] Subscript p
+<Multi_key> <underscore> <r> : "ᵣ" U1D63    # [ICONIC] Subscript r
+<Multi_key> <underscore> <s> : "ₛ" U209B    # [ICONIC] Subscript s
+<Multi_key> <underscore> <t> : "ₜ" U209C    # [ICONIC] Subscript t
+<Multi_key> <underscore> <u> : "ᵤ" U1D64    # [ICONIC] Subscript u
+<Multi_key> <underscore> <v> : "ᵥ" U1D65    # [ICONIC] Subscript v
+<Multi_key> <underscore> <x> : "ₓ" U2093    # [ICONIC] Subscript x
+
+# lowercase greek
+<Multi_key> <a> <l> <p> : "α" U03B1  # [MNEMONIC] Greek small letter alpha
+<Multi_key> <b> <e> <t> : "β" U03B2  # [MNEMONIC] Greek small letter beta
+<Multi_key> <g> <a> <m> : "γ" U03B3  # [MNEMONIC] Greek small letter gamma
+<Multi_key> <d> <e> <l> : "δ" U03B4  # [MNEMONIC] Greek small letter delta
+<Multi_key> <e> <p> <s> : "ε" U03B5  # [MNEMONIC] Greek small letter epsilon
+<Multi_key> <z> <e> <t> : "ζ" U03B6  # [MNEMONIC] Greek small letter zeta
+<Multi_key> <e> <t> <a> : "η" U03B7  # [MNEMONIC] Greek small letter eta
+<Multi_key> <t> <h> <e> : "θ" U03B8  # [MNEMONIC] Greek small letter theta
+<Multi_key> <i> <o> <t> : "ι" U03B9  # [MNEMONIC] Greek small letter iota
+<Multi_key> <k> <a> <p> : "κ" U03BA  # [MNEMONIC] Greek small letter kappa
+<Multi_key> <l> <a> <m> : "λ" U03BB  # [MNEMONIC] Greek small letter lambda
+<Multi_key> <m> <u>     : "μ" U03BC  # [MNEMONIC] Greek small letter mu
+<Multi_key> <n> <u>     : "ν" U03BD  # [MNEMONIC] Greek small letter nu
+<Multi_key> <x> <i>     : "ξ" U03BE  # [MNEMONIC] Greek small letter xi
+<Multi_key> <o> <m> <i> : "ο" U03BF  # [MNEMONIC] Greek small letter omicron
+<Multi_key> <p> <i>     : "π" U03C0  # [MNEMONIC] Greek small letter pi
+<Multi_key> <r> <h> <o> : "ρ" U03C1  # [MNEMONIC] Greek small letter rho
+<Multi_key> <s> <i> <g> : "σ" U03C3  # [MNEMONIC] Greek small letter sigma
+<Multi_key> <p> <h> <i> : "φ" U03C6  # [MNEMONIC] Greek small letter phi
+<Multi_key> <c> <h> <i> : "χ" U03C7  # [MNEMONIC] Greek small letter chi
+<Multi_key> <p> <s> <i> : "ψ" U03C8  # [MNEMONIC] Greek small letter psi
+<Multi_key> <o> <m> <e> : "ω" U03C9  # [MNEMONIC] Greek small letter omega
+
+# uppercase greek
+<Multi_key> <A> <l> <p> : "Α" U0391  # [MNEMONIC] Greek capital letter Alpha
+<Multi_key> <B> <e> <t> : "Β" U0392  # [MNEMONIC] Greek capital letter Beta
+<Multi_key> <G> <a> <m> : "Γ" U0393  # [MNEMONIC] Greek capital letter Gamma
+<Multi_key> <D> <e> <l> : "Δ" U0394  # [MNEMONIC] Greek capital letter Delta
+<Multi_key> <E> <p> <s> : "Ε" U0395  # [MNEMONIC] Greek capital letter Epsilon
+<Multi_key> <Z> <e> <t> : "Ζ" U0396  # [MNEMONIC] Greek capital letter Zeta
+<Multi_key> <E> <t> <a> : "Η" U0397  # [MNEMONIC] Greek capital letter Eta
+<Multi_key> <T> <h> <e> : "Θ" U0398  # [MNEMONIC] Greek capital letter Theta
+<Multi_key> <I> <o> <t> : "Ι" U0399  # [MNEMONIC] Greek capital letter Iota
+<Multi_key> <K> <a> <p> : "Κ" U039A  # [MNEMONIC] Greek capital letter Kappa
+<Multi_key> <L> <a> <m> : "Λ" U039B  # [MNEMONIC] Greek capital letter Lambda
+<Multi_key> <M> <u>     : "Μ" U039C  # [MNEMONIC] Greek capital letter Mu
+<Multi_key> <N> <u>     : "Ν" U039D  # [MNEMONIC] Greek capital letter Nu
+<Multi_key> <X> <i>     : "Ξ" U039E  # [MNEMONIC] Greek capital letter Xi
+<Multi_key> <O> <m> <i> : "Ο" U039F  # [MNEMONIC] Greek capital letter Omicron
+<Multi_key> <P> <i>     : "Π" U03A0  # [MNEMONIC] Greek capital letter Pi
+<Multi_key> <R> <h> <o> : "Ρ" U03A1  # [MNEMONIC] Greek capital letter Rho
+<Multi_key> <S> <i> <g> : "Σ" U03A3  # [MNEMONIC] Greek capital letter Sigma
+<Multi_key> <P> <h> <i> : "Φ" U03A6  # [MNEMONIC] Greek capital letter Phi
+<Multi_key> <C> <h> <i> : "Χ" U03A7  # [MNEMONIC] Greek capital letter Chi
+<Multi_key> <P> <s> <i> : "Ψ" U03A8  # [MNEMONIC] Greek capital letter Psi
+<Multi_key> <O> <m> <e> : "Ω" U03A9  # [MNEMONIC] Greek capital letter Omega
