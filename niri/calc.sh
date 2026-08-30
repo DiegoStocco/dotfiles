@@ -70,8 +70,10 @@ else
 fi
 
 # If using wofi or fuzzel, add the necessary parameters
-if [[ $menu == "wofi" || $menu == "fuzzel" ]]; then
+if [[ $menu == "wofi" ]]; then
     menu_cmd+=(--dmenu --lines 3)
+elif [[ $menu == "fuzzel" ]]; then
+    menu_cmd+=(--dmenu --lines 3 --width 70)
 elif [[ $menu == "dmenu" ]] && [ -n "${DMENU_OPTIONS+1}" ]; then
     read -ra options <<< "$DMENU_OPTIONS"
 
