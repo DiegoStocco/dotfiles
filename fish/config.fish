@@ -11,6 +11,9 @@ if status is-interactive
     alias sv='sudo -e'
     alias neofetch='fastfetch'
     alias :q='exit'
+    alias d='alacritty msg create-window --working-directory $PWD'
+
+    alias whoami='echo Despite everything, it\\\'s still you.'
 
     abbr ccp 'g++ -Wall -Wextra -Wfloat-equal -Wshadow -pedantic -I$HOME/.local/include -Og -g -fsanitize=address,undefined -fstack-protector-strong -fno-omit-frame-pointer -fno-sanitize-recover=all -std=c++23 -DLOCAL'
 
