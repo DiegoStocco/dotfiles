@@ -21,7 +21,7 @@ input {
             // localectl set-x11-keymap.
 
             options "compose:rctrl"
-                layout "it"
+            layout "it"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -658,6 +658,7 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
