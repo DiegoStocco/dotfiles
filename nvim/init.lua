@@ -82,7 +82,7 @@ npairs.add_rule(Rule(" "," ",{"tex", "latek", "typ", "typst"})
 require "mini.pick".setup({})
 
 require "typst-preview".setup({
-    open_cmd = 'firefox -P APP -url %s 2> /dev/null',
+    open_cmd = 'firefox -url %s 2> /dev/null',
     port = 12000,
     extra_args = { "--partial-rendering=true" },
     dependencies_bin = {
@@ -297,6 +297,13 @@ vim.keymap.set({"n", "v"}, "<leader>n", ":norm ")
 
 vim.keymap.set({"n", "v"}, "<leader>p", "\"+p")
 vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = ev.buf })
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = ev.buf })
+  end,
+})
 
 -- Moving selected text (pandaa thx)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
