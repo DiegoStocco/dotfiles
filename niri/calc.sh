@@ -91,15 +91,11 @@ while [[ $# -gt 0 && $1 != "--" ]]; do
 done
 [[ $1 == "--" ]] && shift
 
-answer=
-
 while true; do
-    action=$(echo -e "Copy\nClear\nClose" | "${menu_cmd[@]}" "$@" -p "= $answer")
+    action=$("${menu_cmd[@]}" "$@" --prompt "= " --search "$answer")
 
     case "$action" in
-        "Clear") answer= ;;
-        "Copy") wl-copy "$answer";;
-        "Close"|"") exit ;;
-        *) answer=$(process_query "$answer $action") ;;
+        "") exit ;;
+        *) answer=$(process_query "$action") ;;
     esac
 done
