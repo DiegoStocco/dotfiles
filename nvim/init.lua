@@ -7,7 +7,7 @@ vim.o.expandtab = true
 
 vim.o.signcolumn = "yes"
 vim.o.number = true
-vim.o.relativenumber = true
+-- vim.o.relativenumber = true
 vim.o.undofile = true
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.o.hlsearch = true
@@ -25,6 +25,7 @@ vim.pack.add({
         version = vim.version.range('1.*'),
     },
     { src = 'https://github.com/Saghen/blink.compat'},
+    { src = 'https://github.com/folke/which-key.nvim'},
     { src = 'https://github.com/micangl/cmp-vimtex'},
     -- { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
     { src = 'https://github.com/lervag/vimtex' },
@@ -82,9 +83,10 @@ npairs.add_rule(Rule(" "," ",{"tex", "latek", "typ", "typst"})
 require "mini.pick".setup({})
 
 require "typst-preview".setup({
-    open_cmd = 'firefox -url %s 2> /dev/null',
+    open_cmd = 'firefox -new-window %s 2> /dev/null',
     port = 12000,
-    extra_args = { "--partial-rendering=true" },
+    extra_args = { },
+    debug = true,
     dependencies_bin = {
         ['tinymist'] = "/usr/bin/tinymist",
     },
@@ -137,6 +139,7 @@ require "blink.cmp".setup({
 
 -- Setup LSPs
 vim.lsp.enable({
+    'ada_ls',
     'arduino_language_server',
     'clangd',
     'css',
@@ -146,6 +149,15 @@ vim.lsp.enable({
     'pyright',
     'rust_analyzer',
     'tinymist',
+})
+
+-- Disable <leader> mappings in insert mode with ada_ls
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ada",
+  callback = function(args)
+    vim.keymap.del("i", "<Space>aj", { buffer = args.buf })
+    vim.keymap.del("i", "<Space>al", { buffer = args.buf })
+  end,
 })
 
 --Enable (broadcasting) snippet capability for completion
@@ -270,7 +282,7 @@ vim.g.vimtex_indent_enabled = 0
 
 -- Custom keybindings
 vim.g.mapleader = " "
-vim.g.maplocalleader = "  "
+vim.g.maplocalleader = "\\"
 
 vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
