@@ -468,8 +468,15 @@ binds {
     Super+Alt+M { set-dynamic-cast-monitor; }
     Super+Alt+C { clear-dynamic-cast-target; }
 
+    // Screen mirroring
+    Mod+P repeat=false { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
+
+
     // Calculator
     Super+A hotkey-overlay-title="Calculator"{ spawn-sh "~/.config/niri/calc.sh"; }
+
+    // Files
+    Super+M { spawn-sh "xdg-open \"$( find ~/ -not -path '*/Programmi/*' -not -path '*/[@.]*' -type f -print0 | fuzzel --dmenu0 --width 90 )\""; }
 
     Super+C { spawn-sh "cliphist list | fuzzel --width 100 --dmenu | cliphist decode | wl-copy"; }
 
@@ -644,8 +651,8 @@ binds {
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Mod5+EGrave  { consume-or-expel-window-left; }
+    Mod+Mod5+Plus { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
     Mod+Comma  { consume-window-into-column; }
