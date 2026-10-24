@@ -13,7 +13,6 @@
             "clock"
 	    ],
 	    "modules-right": [
-            "custom/sunsetr",
 		    "idle_inhibitor",
 		    "pulseaudio",
 		    "network",
@@ -168,22 +167,5 @@
           "on-click": "swaync-client -t -sw",
           "on-click-right": "swaync-client -d -sw",
           "escape": true
-        },
-        "custom/sunsetr": {
-            "return-type": "json",
-            "format": "<big>{icon}</big>",
-            "format-icons": {
-                "geo": "󱩷",
-                "static": ""
-            },
-            "icon-size": 17,
-            "signal": 8,
-            "exec": "${HOME}/.config/waybar/sunsetr.sh",
-            "on-click": "${HOME}/.config/waybar/sunsetr.sh switch && pkill -RTMIN+8 waybar",
-            "on-click-right": "sunsetr set static_temp=6500 2> /dev/null",
-            "on-click-middle": "sunsetr set static_temp=3000 2> /dev/null",
-            "on-scroll-up": "sunsetr set static_temp+=50 2> /dev/null",
-            "on-scroll-down": "sunsetr set static_temp-=50 2> /dev/null",
-            "exec-on-event": false
-          }
+        }
 }

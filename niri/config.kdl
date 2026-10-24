@@ -269,7 +269,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 spawn-at-startup "kdeconnect-indicator"
-spawn-at-startup "sunsetr"
+spawn-at-startup "wlsunset" "-l" "41.9" "-L" "12.48" "-t" "3000" "-T" "6500"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
