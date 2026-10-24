@@ -34,7 +34,7 @@ input {
     touchpad {
         // off
         tap
-        dwt
+        // dwt
         // dwtp
         // drag false
         // drag-lock
@@ -271,6 +271,7 @@ layout {
 spawn-at-startup "kdeconnect-indicator"
 spawn-at-startup "wlsunset" "-l" "41.9" "-L" "12.48" "-t" "3000" "-T" "6500"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "/home/diego/.config/niri/niri-hz-auto.sh"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
