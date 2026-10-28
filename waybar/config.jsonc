@@ -14,6 +14,7 @@
 	    ],
 	    "modules-right": [
 		    "idle_inhibitor",
+		    "niri/language",
 		    "pulseaudio",
 		    "network",
 		    // "cpu",
@@ -34,6 +35,9 @@
 			    "locked": "",
 			    "unlocked": ""
 		    }
+	    },
+	    "niri/language": {
+		    "format": "{short}"
 	    },
 	    "idle_inhibitor": {
 		    "format": "<big>{icon}</big>",
