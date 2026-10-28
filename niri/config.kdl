@@ -21,7 +21,7 @@ input {
             // localectl set-x11-keymap.
 
             options "compose:rctrl"
-            layout "it"
+            layout "it,us"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -472,6 +472,8 @@ binds {
     // Screen mirroring
     Mod+P repeat=false { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
 
+    // Change keyboard layout
+    Mod+Alt+K { switch-layout "next"; }
 
     // Calculator
     Super+A hotkey-overlay-title="Calculator"{ spawn-sh "~/.config/niri/calc.sh"; }
