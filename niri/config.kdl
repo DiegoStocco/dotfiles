@@ -21,7 +21,7 @@ input {
             // localectl set-x11-keymap.
 
             options "compose:rctrl"
-            layout "it,us"
+            layout "us,it"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
