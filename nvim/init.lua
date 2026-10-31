@@ -16,6 +16,9 @@ vim.o.smoothscroll = true
 vim.o.termguicolors = true
 -- vim.o.ignorecase = true
 -- vim.o.smartcase = true
+vim.o.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -235,6 +238,7 @@ require("catppuccin").setup({
     },
 })
 vim.cmd.colorscheme "catppuccin-mocha"
+vim.api.nvim_set_hl(0, "Whitespace", { fg = "#f38ba8" })
 
 
 -- Setup lean
