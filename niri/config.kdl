@@ -459,6 +459,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Shift+T { spawn-sh "alacritty --working-directory \"$(find ~/ -type d -not -path '*/[@.]*' -print0 | fuzzel --dmenu0 --width 90)\""; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel" "--terminal" "alacritty -e" "--width" "40"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
     Super+E hotkey-overlay-title="Open file explorer: dolphin" { spawn "dolphin"; }
