@@ -1,7 +1,6 @@
 vim.o.winborder = "rounded"
 -- Indenting stuff
 vim.o.tabstop = 4
-vim.o.smartindent = false
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
@@ -10,14 +9,17 @@ vim.o.number = true
 -- vim.o.relativenumber = true
 vim.o.undofile = true
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.o.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.o.cursorline = true
 -- vim.o.clipboard = "unnamedplus" -- Yank to system clipboard
 vim.o.smoothscroll = true
 vim.o.termguicolors = true
-vim.o.ignorecase = false -- Ignore casing when searching
--- vim.o.smartcase = true  -- Turn off Ignore case when a capital letter is detected
+-- vim.o.ignorecase = true
+-- vim.o.smartcase = true
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 
 vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig'},
@@ -36,7 +38,7 @@ vim.pack.add({
     { src = 'https://github.com/lewis6991/gitsigns.nvim' },
     { src = 'https://github.com/numToStr/FTerm.nvim' },
     { src = 'https://github.com/catppuccin/nvim'},
-    { src = "https://github.com/echasnovski/mini.pick" },
+    { src = "https://github.com/nvim-mini/mini.pick" },
     { src = "https://github.com/windwp/nvim-autopairs" },
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/nvim-mini/mini.icons" },
@@ -71,7 +73,6 @@ require "mini.icons".setup({})
 require "nvim-autopairs".setup({})
 local Rule = require('nvim-autopairs.rule')
 local npairs = require('nvim-autopairs')
-local cond = require('nvim-autopairs.conds')
 
 npairs.add_rule(Rule("$","$",{"tex", "latek", "typ", "typst"}))
 
@@ -81,7 +82,6 @@ require "typst-preview".setup({
     open_cmd = 'firefox -new-window %s 2> /dev/null',
     port = 12000,
     extra_args = { },
-    debug = true,
     dependencies_bin = {
         ['tinymist'] = "/usr/bin/tinymist",
     },
@@ -118,7 +118,7 @@ require "blink.cmp".setup({
     sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
         per_filetype = {
-            tex = {'vimtex'},
+            tex = { inherit_defaults = true, 'vimtex' },
         },
 
         providers = {
@@ -133,11 +133,15 @@ require "blink.cmp".setup({
 })
 
 -- Setup LSPs
+vim.lsp.config('*', {
+    capabilities = require('blink.cmp').get_lsp_capabilities(),
+})
+
 vim.lsp.enable({
     'ada_ls',
     'arduino_language_server',
     'clangd',
-    'css',
+    'cssls',
     'glsl_analyzer',
     'hls',
     'html',
@@ -153,18 +157,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.del("i", "<Space>aj", { buffer = args.buf })
     vim.keymap.del("i", "<Space>al", { buffer = args.buf })
   end,
-})
-
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-vim.lsp.config("html", {
-  capabilities = capabilities,
-})
-
-vim.lsp.config("cssls", {
-  capabilities = capabilities,
 })
 
 -- Treesitter configuration
@@ -203,15 +195,6 @@ require('gitsigns').setup({
                 gitsigns.nav_hunk('prev')
             end
         end)
-
-        vim.keymap.set("n", "<leader>cr", function()
-            local openPop = io.popen(string.format('( cd $(dirname %s 2> /dev/null) 2> /dev/null && git rev-parse --show-toplevel 2>&1 )', vim.fn.expand("%:p") ), 'r')
-            local output = openPop:read('*all')
-            openPop:close()
-
-            if string.sub(output, 1, 1) == "/" then vim.cmd(string.format("cd %s", output)) end
-        end
-)
     end
 })
 
@@ -219,7 +202,6 @@ require('gitsigns').setup({
 require("catppuccin").setup({
     transparent_background = true,
     integrations = {
-        cmp = true,
         gitsigns = true,
         -- treesitter = true,
         -- harpoon = true,
@@ -251,14 +233,6 @@ require("catppuccin").setup({
             },
         },
     },
-    custom_highlights = function(colors)
-        return {
-            CursorLine = { 
-                -- underline = true,
-                -- bg = "#000000",
-            },
-        }
-    end
 })
 vim.cmd.colorscheme "catppuccin-mocha"
 
@@ -276,9 +250,6 @@ vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
 vim.g.vimtex_indent_enabled = 0
 
 -- Custom keybindings
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
@@ -295,10 +266,12 @@ vim.keymap.set("n", "<leader>h", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>ch", ":cd $HOME<CR>")
 vim.keymap.set("n", "<leader>ct", ":cd %:h<CR>")
 vim.keymap.set("n", "<leader>cb", ":cd -<CR>")
+vim.keymap.set("n", "<leader>cr", function()
+      local root = vim.fs.root(0, ".git")
+      if root then vim.cmd.cd(root) end
+  end, { desc = "cd to git root" })
 
 vim.keymap.set("n", "<leader>o", ":Oil<CR>")
-
-vim.keymap.set("n", "<leader>ww", "<cmd>lua require('neowiki').open_wiki()<cr>")
 
 vim.keymap.set({"n", "v"}, "<leader>n", ":norm ")
 
@@ -313,8 +286,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Moving selected text (pandaa thx)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv")
 
 -- Other thing from pandaa
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
